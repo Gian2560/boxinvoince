@@ -11,6 +11,7 @@ services:
       SA_PASSWORD: "BOXinv0lce@1224!DJ"
     volumes:
       - sql_data:/var/opt/mssql
+      - .:/usr/config
 
 volumes:
   sql_data:

@@ -1,0 +1,12 @@
+{
+    "name": "boxinvoice_bd",
+    "version": "1.0.0",
+    "scripts": {
+        "docker:up": "docker compose up -d",
+        "docker:down":"docker compose down",
+        "docker/w:up": "docker-compose up -d",
+        "docker/w:down": "docker-compose down",
+        "docker:init-db": "docker exec -i sqlserver /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"BOXinv0lce@1224!DJ\" -i /usr/config/schema.sql -C"
+
+    }
+}

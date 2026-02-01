@@ -1,6 +1,6 @@
-IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'KaraokeDB')
+IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'BoxInVoice')
 BEGIN
-    CREATE DATABASE KaraokeDB;
+    CREATE DATABASE BoxInVoice;
 END
 GO
 
