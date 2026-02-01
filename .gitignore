@@ -1,0 +1,27 @@
+##--------------------- FOR BACKEND----------------------------------
+## --- Visual Studio ---
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+
+packages/
+*.nuget.props
+*.nuget.targets
+
+
+*.mdf
+*.ldf
+
+## --- Build Output ---
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+## --- Otros ---
+.DS_Store
+Thumbs.db
