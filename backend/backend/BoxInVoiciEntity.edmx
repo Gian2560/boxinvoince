@@ -1,0 +1,446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BoxInVoiceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Lyric">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="song_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="startTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="endTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="content" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Party">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="owner_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="time_start" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="time_end" Type="datetime2" Precision="7" />
+          <Property Name="status" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Playlist">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="party_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="song_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="user_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="position" Type="int" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Song">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="duration" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserBox">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="phone_number" Type="int" Nullable="false" />
+          <Property Name="prefix_number" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="role" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserParty">
+          <Key>
+            <PropertyRef Name="party_id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="party_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="user_id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Lyric_Song">
+          <End Role="Song" Type="Self.Song" Multiplicity="1" />
+          <End Role="Lyric" Type="Self.Lyric" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Song">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Lyric">
+              <PropertyRef Name="song_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Party_Owner">
+          <End Role="UserBox" Type="Self.UserBox" Multiplicity="1" />
+          <End Role="Party" Type="Self.Party" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserBox">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Party">
+              <PropertyRef Name="owner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Playlist_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="1" />
+          <End Role="Playlist" Type="Self.Playlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Playlist">
+              <PropertyRef Name="party_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Playlist_Song">
+          <End Role="Song" Type="Self.Song" Multiplicity="1" />
+          <End Role="Playlist" Type="Self.Playlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Song">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Playlist">
+              <PropertyRef Name="song_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Playlist_User">
+          <End Role="UserBox" Type="Self.UserBox" Multiplicity="1" />
+          <End Role="Playlist" Type="Self.Playlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserBox">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Playlist">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserParty_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="1" />
+          <End Role="UserParty" Type="Self.UserParty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserParty">
+              <PropertyRef Name="party_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserParty_User">
+          <End Role="UserBox" Type="Self.UserBox" Multiplicity="1" />
+          <End Role="UserParty" Type="Self.UserParty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserBox">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserParty">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BoxInVoiceModelStoreContainer">
+          <EntitySet Name="Lyric" EntityType="Self.Lyric" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Party" EntityType="Self.Party" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Playlist" EntityType="Self.Playlist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Song" EntityType="Self.Song" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserBox" EntityType="Self.UserBox" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserParty" EntityType="Self.UserParty" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Lyric_Song" Association="Self.FK_Lyric_Song">
+            <End Role="Song" EntitySet="Song" />
+            <End Role="Lyric" EntitySet="Lyric" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Party_Owner" Association="Self.FK_Party_Owner">
+            <End Role="UserBox" EntitySet="UserBox" />
+            <End Role="Party" EntitySet="Party" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Playlist_Party" Association="Self.FK_Playlist_Party">
+            <End Role="Party" EntitySet="Party" />
+            <End Role="Playlist" EntitySet="Playlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Playlist_Song" Association="Self.FK_Playlist_Song">
+            <End Role="Song" EntitySet="Song" />
+            <End Role="Playlist" EntitySet="Playlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Playlist_User" Association="Self.FK_Playlist_User">
+            <End Role="UserBox" EntitySet="UserBox" />
+            <End Role="Playlist" EntitySet="Playlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserParty_Party" Association="Self.FK_UserParty_Party">
+            <End Role="Party" EntitySet="Party" />
+            <End Role="UserParty" EntitySet="UserParty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserParty_User" Association="Self.FK_UserParty_User">
+            <End Role="UserBox" EntitySet="UserBox" />
+            <End Role="UserParty" EntitySet="UserParty" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BoxInVoiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Lyric">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="song_id" Type="Guid" Nullable="false" />
+          <Property Name="startTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="endTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Song" Relationship="Self.FK_Lyric_Song" FromRole="Lyric" ToRole="Song" />
+        </EntityType>
+        <EntityType Name="Party">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="owner_id" Type="Guid" Nullable="false" />
+          <Property Name="time_start" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="time_end" Type="DateTime" Precision="7" />
+          <Property Name="status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="UserBox" Relationship="Self.FK_Party_Owner" FromRole="Party" ToRole="UserBox" />
+          <NavigationProperty Name="Playlist" Relationship="Self.FK_Playlist_Party" FromRole="Party" ToRole="Playlist" />
+          <NavigationProperty Name="UserBox1" Relationship="Self.UserParty" FromRole="Party" ToRole="UserBox" />
+        </EntityType>
+        <EntityType Name="Playlist">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="party_id" Type="Guid" Nullable="false" />
+          <Property Name="song_id" Type="Guid" Nullable="false" />
+          <Property Name="user_id" Type="Guid" Nullable="false" />
+          <Property Name="position" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Party" Relationship="Self.FK_Playlist_Party" FromRole="Playlist" ToRole="Party" />
+          <NavigationProperty Name="Song" Relationship="Self.FK_Playlist_Song" FromRole="Playlist" ToRole="Song" />
+          <NavigationProperty Name="UserBox" Relationship="Self.FK_Playlist_User" FromRole="Playlist" ToRole="UserBox" />
+        </EntityType>
+        <EntityType Name="Song">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="duration" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Lyric" Relationship="Self.FK_Lyric_Song" FromRole="Song" ToRole="Lyric" />
+          <NavigationProperty Name="Playlist" Relationship="Self.FK_Playlist_Song" FromRole="Song" ToRole="Playlist" />
+        </EntityType>
+        <EntityType Name="UserBox">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone_number" Type="Int32" Nullable="false" />
+          <Property Name="prefix_number" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Party" Relationship="Self.FK_Party_Owner" FromRole="UserBox" ToRole="Party" />
+          <NavigationProperty Name="Playlist" Relationship="Self.FK_Playlist_User" FromRole="UserBox" ToRole="Playlist" />
+          <NavigationProperty Name="Party1" Relationship="Self.UserParty" FromRole="UserBox" ToRole="Party" />
+        </EntityType>
+        <Association Name="FK_Lyric_Song">
+          <End Role="Song" Type="Self.Song" Multiplicity="1" />
+          <End Role="Lyric" Type="Self.Lyric" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Song">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Lyric">
+              <PropertyRef Name="song_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Party_Owner">
+          <End Role="UserBox" Type="Self.UserBox" Multiplicity="1" />
+          <End Role="Party" Type="Self.Party" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserBox">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Party">
+              <PropertyRef Name="owner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Playlist_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="1" />
+          <End Role="Playlist" Type="Self.Playlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Playlist">
+              <PropertyRef Name="party_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Playlist_Song">
+          <End Role="Song" Type="Self.Song" Multiplicity="1" />
+          <End Role="Playlist" Type="Self.Playlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Song">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Playlist">
+              <PropertyRef Name="song_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Playlist_User">
+          <End Role="UserBox" Type="Self.UserBox" Multiplicity="1" />
+          <End Role="Playlist" Type="Self.Playlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserBox">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Playlist">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserParty">
+          <End Role="Party" Type="Self.Party" Multiplicity="*" />
+          <End Role="UserBox" Type="Self.UserBox" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="BoxInVoiceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Lyric" EntityType="Self.Lyric" />
+          <EntitySet Name="Party" EntityType="Self.Party" />
+          <EntitySet Name="Playlist" EntityType="Self.Playlist" />
+          <EntitySet Name="Song" EntityType="Self.Song" />
+          <EntitySet Name="UserBox" EntityType="Self.UserBox" />
+          <AssociationSet Name="FK_Lyric_Song" Association="Self.FK_Lyric_Song">
+            <End Role="Song" EntitySet="Song" />
+            <End Role="Lyric" EntitySet="Lyric" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Party_Owner" Association="Self.FK_Party_Owner">
+            <End Role="UserBox" EntitySet="UserBox" />
+            <End Role="Party" EntitySet="Party" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Playlist_Party" Association="Self.FK_Playlist_Party">
+            <End Role="Party" EntitySet="Party" />
+            <End Role="Playlist" EntitySet="Playlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Playlist_Song" Association="Self.FK_Playlist_Song">
+            <End Role="Song" EntitySet="Song" />
+            <End Role="Playlist" EntitySet="Playlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Playlist_User" Association="Self.FK_Playlist_User">
+            <End Role="UserBox" EntitySet="UserBox" />
+            <End Role="Playlist" EntitySet="Playlist" />
+          </AssociationSet>
+          <AssociationSet Name="UserParty" Association="Self.UserParty">
+            <End Role="Party" EntitySet="Party" />
+            <End Role="UserBox" EntitySet="UserBox" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BoxInVoiceModelStoreContainer" CdmEntityContainer="BoxInVoiceEntities">
+          <EntitySetMapping Name="Lyric">
+            <EntityTypeMapping TypeName="BoxInVoiceModel.Lyric">
+              <MappingFragment StoreEntitySet="Lyric">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="song_id" ColumnName="song_id" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+                <ScalarProperty Name="content" ColumnName="content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Party">
+            <EntityTypeMapping TypeName="BoxInVoiceModel.Party">
+              <MappingFragment StoreEntitySet="Party">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="owner_id" ColumnName="owner_id" />
+                <ScalarProperty Name="time_start" ColumnName="time_start" />
+                <ScalarProperty Name="time_end" ColumnName="time_end" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Playlist">
+            <EntityTypeMapping TypeName="BoxInVoiceModel.Playlist">
+              <MappingFragment StoreEntitySet="Playlist">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="party_id" ColumnName="party_id" />
+                <ScalarProperty Name="song_id" ColumnName="song_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Song">
+            <EntityTypeMapping TypeName="BoxInVoiceModel.Song">
+              <MappingFragment StoreEntitySet="Song">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserBox">
+            <EntityTypeMapping TypeName="BoxInVoiceModel.UserBox">
+              <MappingFragment StoreEntitySet="UserBox">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="prefix_number" ColumnName="prefix_number" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UserParty" TypeName="BoxInVoiceModel.UserParty" StoreEntitySet="UserParty">
+            <EndProperty Name="Party">
+              <ScalarProperty Name="id" ColumnName="party_id" />
+            </EndProperty>
+            <EndProperty Name="UserBox">
+              <ScalarProperty Name="id" ColumnName="user_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
