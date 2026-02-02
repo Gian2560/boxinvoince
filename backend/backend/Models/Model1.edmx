@@ -318,7 +318,7 @@
           <End Role="Party" Type="Self.Party" Multiplicity="*" />
           <End Role="UserBox" Type="Self.UserBox" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="BoxInVoiceEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="BoxInVoiceEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Lyric" EntityType="Self.Lyric" />
           <EntitySet Name="Party" EntityType="Self.Party" />
           <EntitySet Name="Playlist" EntityType="Self.Playlist" />
@@ -354,7 +354,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BoxInVoiceModelStoreContainer" CdmEntityContainer="BoxInVoiceEntities">
+        <EntityContainerMapping StorageEntityContainer="BoxInVoiceModelStoreContainer" CdmEntityContainer="BoxInVoiceEntities1">
           <EntitySetMapping Name="Lyric">
             <EntityTypeMapping TypeName="BoxInVoiceModel.Lyric">
               <MappingFragment StoreEntitySet="Lyric">

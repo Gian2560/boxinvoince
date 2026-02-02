@@ -7,35 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace backend
+namespace backend.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class UserBox
+    public partial class Party
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserBox()
+        public Party()
         {
-            this.Party = new HashSet<Party>();
             this.Playlist = new HashSet<Playlist>();
-            this.Party1 = new HashSet<Party>();
+            this.UserBox1 = new HashSet<UserBox>();
         }
     
         public System.Guid id { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public int phone_number { get; set; }
-        public string prefix_number { get; set; }
-        public string name { get; set; }
-        public string last_name { get; set; }
-        public string role { get; set; }
+        public System.Guid owner_id { get; set; }
+        public System.DateTime time_start { get; set; }
+        public Nullable<System.DateTime> time_end { get; set; }
+        public string status { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Party> Party { get; set; }
+        public virtual UserBox UserBox { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Playlist> Playlist { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Party> Party1 { get; set; }
+        public virtual ICollection<UserBox> UserBox1 { get; set; }
     }
 }

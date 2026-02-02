@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace backend
+namespace backend.Models
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BoxInVoiceEntities : DbContext
+    public partial class BoxInVoiceEntities1 : DbContext
     {
-        public BoxInVoiceEntities()
-            : base("name=BoxInVoiceEntities")
+        public BoxInVoiceEntities1()
+            : base("name=BoxInVoiceEntities1")
         {
         }
     
