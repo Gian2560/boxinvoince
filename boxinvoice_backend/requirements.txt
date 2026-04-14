@@ -1,8 +1,0 @@
-fastapi
-uvicorn[standard]
-python-multipart
-faster-whisper
-celery
-redis
-aiofiles
-demucs
