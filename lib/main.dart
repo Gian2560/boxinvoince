@@ -1,5 +1,7 @@
+import 'package:app/config/i18n_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,16 +16,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'BoxInVoice',
       //TODO: try to refactor the i18n config and move intro namespacefiletransaltion
-      localizationsDelegates: [
-        FlutterI18nDelegate(
-          translationLoader: FileTranslationLoader(
-            useCountryCode: false,
-            fallbackFile: 'en',
-            basePath: 'assets/i18n',
-          ),
-        ),
-      ],
-      supportedLocales: [Locale('es'), Locale('en')],
+      localizationsDelegates: I18nConfig.localizationsDelegates,
+      supportedLocales: I18nConfig.supportedLocales,
 
       theme: ThemeData(
         // This is the theme of your application.
