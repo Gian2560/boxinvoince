@@ -11,7 +11,7 @@ class I18nConfig {
           translationLoader: FileTranslationLoader(
             useCountryCode: false,
             fallbackFile: 'es',
-            basePath: 'assets/flutter_i18n',
+            basePath: 'assets/i18n',
           ),
         ),
         GlobalMaterialLocalizations.delegate,
