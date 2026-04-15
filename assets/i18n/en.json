@@ -1,3 +1,5 @@
 {
-    
+    "upload_song": "Upload your song",
+    "select_file": "Select file",
+    "upload_song_instrucction": "Upload your MP3 or WAV file to extract the instrumental track and lyrics"
 }

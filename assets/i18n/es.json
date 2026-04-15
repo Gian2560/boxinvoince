@@ -1,3 +1,5 @@
 {
-    
+    "upload_song":"Sube tu canción",
+    "select_file":"Seleccionar archivo",
+    "upload_song_instrucction":"Sube tu archivo MP3 o WAV para extrar la pista instrumental y la letra"
 }

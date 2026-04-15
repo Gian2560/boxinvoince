@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 
 /*
   @method: This widget is for create a space to upload music.
@@ -42,7 +43,24 @@ class UploadInvoiceBoxWidget extends StatelessWidget {
 
         const SizedBox(height: 15),
 
-        const Text(""),
+        Text(
+          FlutterI18n.translate(context, "upload_song"),
+          style: const TextStyle(
+            fontSize: 18,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+
+        const SizedBox(height: 10),
+
+        Text(
+          FlutterI18n.translate(context, "upload_song_instruction"),
+          textAlign: TextAlign.center,
+          style: const TextStyle(color: Colors.grey, fontSize: 14),
+        ),
+
+        const SizedBox(height: 20),
       ],
     );
   }
