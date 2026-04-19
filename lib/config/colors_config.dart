@@ -1,55 +1,44 @@
-// Configuración de colores coherente para la aplicación
-// Esquema de colores moderno con tonos azules y verdes para una app de música
-
 import 'package:flutter/material.dart';
 
 class ColorsConfig {
-  // Colores primarios
-  static const Color primary = Color(0xFF1976D2); // Azul principal
-  static const Color primaryVariant = Color(0xFF1565C0); // Azul más oscuro
-  static const Color onPrimary = Color(
-    0xFFFFFFFF,
-  ); // Texto sobre primary (blanco)
+  // === FONDOS ===
+  static const Color backgroundDark = Color(0xFF111114);      // Fondo principal app
+  static const Color surfaceCard = Color(0xFF1A1A1F);         // Fondo del card/box
+  static const Color surfaceIcon = Color(0xFF2C2C34);         // Fondo del ícono
+  static const Color surfaceHeader = Color(0xFF1A2A1A);       // Fondo badge server
 
-  // Colores secundarios
-  static const Color secondary = Color(0xFF4CAF50); // Verde secundario
-  static const Color secondaryVariant = Color(0xFF388E3C); // Verde más oscuro
-  static const Color onSecondary = Color(
-    0xFFFFFFFF,
-  ); // Texto sobre secondary (blanco)
+  // === MARCA ===
+  static const Color brandPurple = Color(0xFF2979FF);       // Logo / accent principal
 
-  // Colores de superficie y fondo
-  static const Color background = Color(0xFFF5F5F5); // Fondo gris claro
-  static const Color onBackground = Color(
-    0xFF212121,
-  ); // Texto sobre background (negro)
-  static const Color surface = Color(0xFFFFFFFF); // Superficie blanca
-  static const Color onSurface = Color(
-    0xFF212121,
-  ); // Texto sobre surface (negro)
+  // === TEXTO ===
+  static const Color textPrimary = Colors.white;              // Títulos
+  static const Color textSecondary = Color(0xFF8888A0);       // Subtítulos / hints
+  static const Color textMuted = Color(0xFF666680);           // Labels pequeños
 
-  // Colores de acento y error
-  static const Color accent = Color(0xFFFF9800); // Naranja acento
-  static const Color error = Color(0xFFF44336); // Rojo error
-  static const Color onError = Color(0xFFFFFFFF); // Texto sobre error (blanco)
+  // === BORDES ===
+  static const Color borderCard = Color(0xFF2A2A32);          // Borde del card (sólido)
+  static const Color borderServer = Color(0xFF2A4A2A);        // Borde badge server
 
-  // Colores adicionales para componentes UI
-  static const Color cardBackground = Color(0xFFFFFFFF); // Fondo de tarjetas
-  static const Color divider = Color(0xFFBDBDBD); // Divisores
-  static const Color hintText = Color(0xFF9E9E9E); // Texto de sugerencia
-  static const Color disabled = Color(0xFFBDBDBD); // Elementos deshabilitados
+  // === ESTADOS ===
+  static const Color serverActive = Color(0xFF44FF88);        // Indicador server activo
+  static const Color iconColor = Color(0xFFB0B0C0);           // Color ícono upload
 
-  // Colores para botones
-  static const Color buttonPrimary = primary;
-  static const Color buttonSecondary = secondary;
-  static const Color buttonDisabled = disabled;
-  static const Color buttonTextPrimary = onPrimary;
-  static const Color buttonTextSecondary = onSecondary;
-  static const Color buttonLoadingIndicator = onPrimary;
+  // === BOTONES ===
+  static const Color buttonPrimary = Colors.white;            // Fondo botón principal
+  static const Color buttonTextPrimary = Colors.black;        // Texto botón principal
+  static const Color buttonDisabled = Color(0xFF2C2C34);      // Botón deshabilitado
+  static const Color buttonLoadingIndicator = Colors.white;
+
+  // === HELPERS ===
+  static Color get cardBorderWithOpacity =>
+      Colors.white.withOpacity(0.15);                         // Borde card con transparencia
+
+  // === LEGACY (mantener compatibilidad) ===
+  static const Color primary = brandPurple;
+  static const Color error = Color(0xFFF44336);
+  static const Color onPrimary = Colors.white;
   static Color getPrimaryColor() => primary;
-  static Color getSecondaryColor() => secondary;
-  static Color getBackgroundColor() => background;
-  static Color getSurfaceColor() => surface;
+  static Color getBackgroundColor() => backgroundDark;
+  static Color getSurfaceColor() => surfaceCard;
   static Color getErrorColor() => error;
-  static Color getAccentColor() => accent;
 }
