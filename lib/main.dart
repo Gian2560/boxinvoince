@@ -1,4 +1,5 @@
 import 'package:app/config/i18n_config.dart';
+import 'package:app/views/UploadMusicView.dart';
 import 'package:app/views/layout/base_layout.dart';
 import 'package:app/views/widgets/upload_invoice_box_widget.dart';
 import 'package:flutter/material.dart';
@@ -21,10 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: BaseLayout(
-        title: 'BoxInVoice',
-        child: UploadInvoiceBoxWidget(onFileSelected: () {}),
-      ),
+      home: Uploadmusicview()
     );
   }
 }

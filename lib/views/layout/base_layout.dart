@@ -5,7 +5,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 class BaseLayout extends StatelessWidget {
   final Widget child;
   final String title;
-  const BaseLayout({super.key, required this.child, required this.title});
+  const BaseLayout({super.key, required this.title, required this.child});
 
   @override
   Widget build(BuildContext context) {
