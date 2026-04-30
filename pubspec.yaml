@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_i18n: ^0.37.1
   file_picker: ^11.0.2
+  provider: ^6.1.5+1
+  dio: ^5.9.2
 
 dev_dependencies:
   flutter_test:

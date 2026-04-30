@@ -2,5 +2,13 @@
     "title_project": "BoxInVoice",
     "upload_song": "Upload your song",
     "select_file": "Select file",
-    "upload_song_instrucction": "Upload your MP3 or WAV file to extract the instrumental track and lyrics"
+    "upload_song_instrucction": "Upload your MP3 or WAV file to extract the instrumental track and lyrics",
+    "ready_to_process": "Ready to process",
+    "start": "Start",
+    "uploading_audio": "Uploading audio",
+    "processing_audio": "Processing audio",
+    "key_message_waiting_process_1": "Message for the user 1",
+    "key_message_waiting_process_2": "Message for the user 2" ,
+    "key_message_waiting_process_3": "Message for the user 3" ,
+    "key_message_waiting_process_4": "Message for the user 4"
 }
